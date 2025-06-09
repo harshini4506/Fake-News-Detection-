@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Result{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4">Prediction Result</h2>
+                    
+                    <div class="text-center mb-4">
+                        <h3 class="mb-3">The news is predicted to be:</h3>
+                        <span class="badge {% if prediction == 'FAKE' %}bg-danger{% else %}bg-success{% endif %} fs-4">
+                            {{ prediction }}
+                        </span>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Confidence Level:</h4>
+                        <div class="progress confidence-meter" data-confidence="{{ confidence }}" style="height: 25px;">
+                            <div class="progress-bar {% if prediction == 'FAKE' %}bg-danger{% else %}bg-success{% endif %}" 
+                                 role="progressbar" 
+                                 style="width: {{ confidence }}%"
+                                 aria-valuenow="{{ confidence }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100">
+                                {{ confidence }}%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Model Used:</h4>
+                        <p class="lead">{{ model_used | replace('_', ' ') | title }}</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Analyzed Text:</h4>
+                        <div class="p-3 bg-light rounded">
+                            <p class="mb-0">{{ text }}</p>
+                        </div>
+                    </div>
+
+                    {% if related_news %}
+                    <div class="mb-4">
+                        <h4>Related News:</h4>
+                        <div class="list-group">
+                            {% for news in related_news %}
+                            <div class="list-group-item">
+                                <p class="mb-1">{{ news.text[:200] }}...</p>
+                                <small class="text-muted">Label: {{ news.label }}</small>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('predict') }}" class="btn btn-primary">
+                            <i class="fas fa-redo me-2"></i>Analyze Another News
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const confidenceMeter = document.querySelector('.confidence-meter');
+    if (confidenceMeter) {
+        const confidence = parseFloat(confidenceMeter.dataset.confidence);
+        const progressBar = confidenceMeter.querySelector('.progress-bar');
+        if (progressBar) {
+            progressBar.style.width = confidence + '%';
+        }
+    }
+});
+</script>
+{% endblock %} 

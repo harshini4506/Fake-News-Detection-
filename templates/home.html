@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-5 text-center bg-light">
+    <div class="container">
+        <h1 class="display-4 fw-bold text-primary mb-3">Fake News Detection</h1>
+        <p class="lead text-muted mb-4">Using advanced machine learning to combat misinformation and promote media literacy</p>
+        {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Get Started</a>
+        {% else %}
+            <a href="{{ url_for('predict') }}" class="btn btn-primary btn-lg">Start Detection</a>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-5">Key Features</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-robot feature-icon text-primary mb-3"></i>
+                    <h3 class="card-title h5 mb-3">AI-Powered Analysis</h3>
+                    <p class="card-text text-muted">Advanced machine learning algorithms analyze text patterns to identify potential fake news.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-shield-alt feature-icon text-primary mb-3"></i>
+                    <h3 class="card-title h5 mb-3">Real-time Detection</h3>
+                    <p class="card-text text-muted">Instant analysis of news articles and text content to verify authenticity.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-chart-line feature-icon text-primary mb-3"></i>
+                    <h3 class="card-title h5 mb-3">Detailed Reports</h3>
+                    <p class="card-text text-muted">Comprehensive analysis reports with confidence scores and related articles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-5">How It Works</h2>
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <span class="h4 mb-0">1</span>
+                    </div>
+                    <h4 class="h6 fw-bold">Input Text</h4>
+                    <p class="card-text text-muted">Enter or paste the news article you want to verify</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <span class="h4 mb-0">2</span>
+                    </div>
+                    <h4 class="h6 fw-bold">Analysis</h4>
+                    <p class="card-text text-muted">Our AI analyzes the text using multiple models</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <span class="h4 mb-0">3</span>
+                    </div>
+                    <h4 class="h6 fw-bold">Verification</h4>
+                    <p class="card-text text-muted">Get detailed results with confidence scores</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <span class="h4 mb-0">4</span>
+                    </div>
+                    <h4 class="h6 fw-bold">Related News</h4>
+                    <p class="card-text text-muted">View similar articles for comparison</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="container my-5 text-center">
+    <div class="card bg-primary text-white p-5 shadow-lg border-0">
+        <h2 class="mb-4">Ready to Verify News?</h2>
+        <p class="lead mb-4">Join thousands of users who trust our platform for accurate news verification</p>
+         {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('register') }}" class="btn btn-light btn-lg">Sign Up Now</a>
+        {% else %}
+            <a href="{{ url_for('predict') }}" class="btn btn-light btn-lg">Start Detection</a>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %} 
